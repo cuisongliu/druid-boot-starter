@@ -4,12 +4,13 @@
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://opensource.org/licenses/mit-license.php)
 
 #  [Druid](https://github.com/alibaba/druid)  integration  with springboot
+
 Druid-Spring-Boot-Starter 帮助你集成通用 [Druid](https://github.com/alibaba/druid) 到 Spring Boot。
 Druid-Spring-Boot-Starter will help you use [Druid](https://github.com/alibaba/druid) with Spring Boot.
 
-##How to use
+## How to use
 
-###mavem
+### maven
 
 在pom.xml加入nexus资源库
 
@@ -39,7 +40,7 @@ Add the following dependency to your pom.xml:
        <version>1.0</version>
      </dependency>
 
-###gradle
+### gradle
 
 在build.gradle加入nexus资源库
 
@@ -62,4 +63,4 @@ Add the following dependency to your build.gradle:
     
 ## Acknowledgments
 
- [OrderByHelper](https://github.com/abel533/OrderByHelper).
+ [druid](https://github.com/alibaba/druid).
