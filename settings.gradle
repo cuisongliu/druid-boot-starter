@@ -1,0 +1,3 @@
+rootProject.name = 'druid-boot-starter'
+include 'druid-spring-boot-autoconfigure'
+include 'druid-spring-boot-starter'
