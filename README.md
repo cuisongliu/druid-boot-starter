@@ -6,6 +6,7 @@
 #  [Druid](https://github.com/alibaba/druid)  integration  with springboot
 
 Druid-Spring-Boot-Starter 帮助你集成通用 [Druid](https://github.com/alibaba/druid) 到 Spring Boot。
+
 Druid-Spring-Boot-Starter will help you use [Druid](https://github.com/alibaba/druid) with Spring Boot.
 
 ## How to use
@@ -57,6 +58,7 @@ Add the following nexus repository to your build.gradle:
     
 
 在build.gradle加入依赖
+
 Add the following dependency to your build.gradle:
     
     compile "com.cuisongliu:druid-spring-boot-starter:1.0"
