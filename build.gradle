@@ -21,6 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+plugins {
+    id "io.codearte.nexus-staging" version "0.8.0"
+}
 apply from: "$rootDir/gradle/allproject.gradle"
 apply from: "$rootDir/gradle/subprojects.gradle"
 task printEnv {

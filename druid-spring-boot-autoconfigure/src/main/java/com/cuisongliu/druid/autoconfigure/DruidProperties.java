@@ -34,12 +34,9 @@ import java.util.Properties;
  * @author cuijinrui
  * @since 2017/5/14
  */
-@ConfigurationProperties(prefix = "druid")
+@ConfigurationProperties(prefix = DruidProperties.DRUID_PREFIX)
 public class DruidProperties {
-    private String url;
-    private String username;
-    private String password;
-
+    public static final String DRUID_PREFIX = "spring.datasource.druid";
     private int maxActive = DruidAbstractDataSource.DEFAULT_MAX_ACTIVE_SIZE;
     private int minIdle = DruidAbstractDataSource.DEFAULT_MIN_IDLE;
     private int initialSize = DruidAbstractDataSource.DEFAULT_INITIAL_SIZE;
@@ -68,30 +65,6 @@ public class DruidProperties {
 
     public void setConnectionProperties(Properties connectionProperties) {
         this.connectionProperties = connectionProperties;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public int getMaxActive() {

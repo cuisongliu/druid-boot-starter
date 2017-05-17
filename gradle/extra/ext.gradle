@@ -26,10 +26,12 @@
 ext {
     junitVersion = "4.11"
     springBootVersion = "1.5.3.RELEASE"
-    duridVersion = "1.0.29"
+    duridVersion = "1.0.31"
     projectLocation = "https://github.com/cuisongliu/${rootProject.name}"
     baseUrl = "http://maven.cuisongliu.com"
     nexusUrl = "$baseUrl/content/groups/public/"
     uploadUrl = "$baseUrl/content/repositories/releases/"
     uploadSnapshotsUrl = "$baseUrl/content/repositories/snapshots/"
+    uploadOssUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+    uploadOssSnapshotsUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
 }

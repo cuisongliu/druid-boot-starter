@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 allprojects {
-    group 'com.cuisongliu'
-    version = '1.0'
     apply from: "$rootDir/gradle/extra/ext.gradle"
+    group 'com.cuisongliu'
+    version = "${duridVersion}"
     repositories {
         mavenLocal()
         maven { url "$nexusUrl" }

@@ -56,13 +56,40 @@ Add the following nexus repository to your build.gradle:
         }
     }
     
-
 在build.gradle加入依赖
 
 Add the following dependency to your build.gradle:
     
     compile "com.cuisongliu:druid-spring-boot-starter:1.0"
     
+### springboot properties set
+
+在application.properties 或者application.yml加入[相关参数](https://github.com/alibaba/druid/wiki/DruidDataSource%E9%85%8D%E7%BD%AE%E5%B1%9E%E6%80%A7%E5%88%97%E8%A1%A8)
+
+at  application.properties or application.yml append some properties.
+
+properties|IsNull?
+---|---
+spring.datasource.url|no
+spring.datasource.username|no
+spring.datasource.password|no
+spring.datasource.druid.maxActive|yes
+spring.datasource.druid.minIdle|yes
+spring.datasource.druid.initialSize|yes
+spring.datasource.druid.maxWait|yes
+spring.datasource.druid.timeBetweenEvictionRunsMillis|yes
+spring.datasource.druid.maxOpenPreparedStatements|yes
+spring.datasource.druid.testOnBorrow|yes
+spring.datasource.druid.validationQuery|yes
+spring.datasource.druid.testOnReturn|yes
+spring.datasource.druid.testWhileIdle|yes
+spring.datasource.druid.poolPreparedStatements|yes
+spring.datasource.druid.filters|yes
+spring.datasource.druid.maxPoolPreparedStatementPerConnectionSize|yes
+spring.datasource.druid.validationQueryTimeout|yes
+spring.datasource.druid.minEvictableIdleTimeMillis|yes
+spring.datasource.druid.connectionProperties|yes
+
 ## Acknowledgments
 
  [druid](https://github.com/alibaba/druid).

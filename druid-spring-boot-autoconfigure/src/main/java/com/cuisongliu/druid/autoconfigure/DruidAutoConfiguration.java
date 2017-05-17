@@ -24,11 +24,9 @@
 package com.cuisongliu.druid.autoconfigure;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,19 +41,23 @@ import java.sql.SQLException;
 @Configuration
 @EnableConfigurationProperties(DruidProperties.class)
 @ConditionalOnClass(DruidDataSource.class)
-@ConditionalOnProperty(prefix = "druid", name = "url")
-@AutoConfigureBefore(DataSourceAutoConfiguration.class)
 public class DruidAutoConfiguration {
 
-    @Autowired
-    private DruidProperties properties;
 
     @Bean
-    public DataSource dataSource() {
-        DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setUrl(properties.getUrl());
-        dataSource.setUsername(properties.getUsername());
-        dataSource.setPassword(properties.getPassword());
+    @ConfigurationProperties(DruidProperties.DRUID_PREFIX)
+    public DataSource dataSource(DruidProperties properties) {
+        //base datasource config,use spring datasource autoconfig.
+        DruidDataSource datasource = (DruidDataSource) DataSourceBuilder
+                .create()
+                .type(DruidDataSource.class)
+                .build();
+        //druid config.
+        configDruid(datasource, properties);
+        return datasource;
+    }
+
+    private void configDruid(DruidDataSource dataSource, DruidProperties properties) {
         if (properties.getInitialSize() > 0) {
             dataSource.setInitialSize(properties.getInitialSize());
         }
@@ -90,11 +92,9 @@ public class DruidAutoConfiguration {
         dataSource.setPoolPreparedStatements(properties.getPoolPreparedStatements());
         dataSource.setConnectProperties(properties.getConnectionProperties());
         try {
-            dataSource.setFilters(properties.getFilters());
-            dataSource.init();
+            dataSource.setFilters(properties.getFilters() != null ? properties.getFilters() : "stat");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new IllegalArgumentException("please check your spring.datasource.druid.filters property.", e);
         }
-        return dataSource;
     }
 }

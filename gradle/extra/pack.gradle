@@ -72,7 +72,41 @@ def pomConfig = {
         }
     }
 }
+signing {
+    sign configurations.archives
+}
+nexusStaging {
+    packageGroup = "com.cuisongliu" //optional if packageGroup == project.getGroup()
+    stagingProfileId = "64feae5a43b07b" //when not defined will be got from server using "packageGroup"
+    username = project.hasProperty("ossUsername") ? ossUsername : System.getenv("ossUsername")
+    password = project.hasProperty("ossPassword") ? ossPassword : System.getenv("ossPassword")
 
+}
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "$uploadOssSnapshotsUrl") {
+                authentication(userName: project.hasProperty("ossUsername") ? ossUsername : System.getenv("ossUsername"),
+                        password: project.hasProperty("ossPassword") ? ossPassword : System.getenv("ossPassword"))
+            }
+            repository(url: "$uploadOssUrl") {
+                authentication(userName: project.hasProperty("ossUsername") ? ossUsername : System.getenv("ossUsername"),
+                        password: project.hasProperty("ossPassword") ? ossPassword : System.getenv("ossPassword"))
+            }
+            beforeDeployment { MavenDeployment deployment ->
+                signing.signPom(deployment)
+            }
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('url', "$projectLocation")
+                root.appendNode('description', "MyBatis OrderByHelper integration with springboot.")
+                root.appendNode('name', "$project.name")
+                root.appendNode('packaging', 'jar')
+                root.children().last() + pomConfig
+            }
+        }
+    }
+}
 publishing {
     publications {
         maven(MavenPublication) {
