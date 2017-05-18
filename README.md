@@ -68,27 +68,29 @@ Add the following dependency to your build.gradle:
 
 at  application.properties or application.yml append some properties.
 
-properties|IsNull?
----|---
-spring.datasource.url|no
-spring.datasource.username|no
-spring.datasource.password|no
-spring.datasource.druid.maxActive|yes
-spring.datasource.druid.minIdle|yes
-spring.datasource.druid.initialSize|yes
-spring.datasource.druid.maxWait|yes
-spring.datasource.druid.timeBetweenEvictionRunsMillis|yes
-spring.datasource.druid.maxOpenPreparedStatements|yes
-spring.datasource.druid.testOnBorrow|yes
-spring.datasource.druid.validationQuery|yes
-spring.datasource.druid.testOnReturn|yes
-spring.datasource.druid.testWhileIdle|yes
-spring.datasource.druid.poolPreparedStatements|yes
-spring.datasource.druid.filters|yes
-spring.datasource.druid.maxPoolPreparedStatementPerConnectionSize|yes
-spring.datasource.druid.validationQueryTimeout|yes
-spring.datasource.druid.minEvictableIdleTimeMillis|yes
-spring.datasource.druid.connectionProperties|yes
+| properties | IsNull? | Defaults |
+| :------|:------|:------|
+|spring.datasource.url|no|null|
+|spring.datasource.username|no|null|
+|spring.datasource.password|no|null|
+|spring.datasource.druid.max-active|yes|8|
+|spring.datasource.druid.min-idle|yes|0|
+|spring.datasource.druid.initial-size|yes|0|
+|spring.datasource.druid.max-wait|yes|-1|
+|spring.datasource.druid.time-between-eviction-runs-millis|yes|60 * 1000L|
+|spring.datasource.druid.max-open-prepared-statements|yes|-1|
+|spring.datasource.druid.test-on-borrow|yes|false|
+|spring.datasource.druid.validation-query|yes|null|
+|spring.datasource.druid.test-on-return|yes|false|
+|spring.datasource.druid.test-while-idle|yes|true|
+|spring.datasource.druid.pool-prepared-statements|yes|false|
+|spring.datasource.druid.filters|yes|false|
+|spring.datasource.druid.max-pool-prepared-statement-per-connection-size|yes|-1|
+|spring.datasource.druid.validation-query-timeout|yes|-1|
+|spring.datasource.druid.min-evictable-idle-time-millis|yes|1000L * 60L * 30L|
+|spring.datasource.druid.connection-properties|yes|null|
+
+
 
 ## Acknowledgments
 
