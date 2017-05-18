@@ -133,6 +133,7 @@ sql slow config:
 |spring.datasource.druid.stat.target-bean-type|no|null|
 
 spring.datasource.druid.stat.aop-type  待选值有[ type ]
+
 spring.datasource.druid.stat.aop-type  selected value is [ type ]
 
 ## Example
