@@ -187,4 +187,5 @@ public class DruidProperties {
     public void setFilters(String filters) {
         this.filters = filters;
     }
+
 }

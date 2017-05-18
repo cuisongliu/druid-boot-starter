@@ -42,19 +42,16 @@ import java.sql.SQLException;
 @Configuration
 @EnableConfigurationProperties(DruidProperties.class)
 @ConditionalOnClass(DruidDataSource.class)
-@Import({DruidServletAutoConfiguration.class})
+@Import({DruidServletAutoConfiguration.class,DruidFilterAutoConfiguration.class})
 public class DruidAutoConfiguration {
-
 
     @Bean
     @ConfigurationProperties(DruidProperties.DRUID_PREFIX)
     public DataSource dataSource(DruidProperties properties) {
-        //base datasource config,use spring datasource autoconfig.
         DruidDataSource datasource = (DruidDataSource) DataSourceBuilder
                 .create()
                 .type(DruidDataSource.class)
                 .build();
-        //druid config.
         configDruid(datasource, properties);
         return datasource;
     }

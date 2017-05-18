@@ -13,9 +13,9 @@ Druid-Spring-Boot-Starter will help you use [Druid](https://github.com/alibaba/d
 
 ### maven
 
-在pom.xml加入nexus资源库
+在pom.xml加入nexus资源库（解决中国访问慢的问题,已经加入中央仓库）
 
-Add the following nexus repository to your pom.xml:
+Add the following nexus repository(fix china access slow problem,already append to central nexus.)  to your pom.xml:
 
     <repositories>
         <repository>
@@ -38,14 +38,14 @@ Add the following dependency to your pom.xml:
     <dependency>
        <groupId>com.cuisongliu</groupId>
        <artifactId>druid-spring-boot-starter</artifactId>
-       <version>1.0</version>
+       <version>1.0.31.01</version>
      </dependency>
 
 ### gradle
 
-在build.gradle加入nexus资源库
+在build.gradle加入nexus资源库（解决中国访问慢的问题,已经加入中央仓库）
 
-Add the following nexus repository to your build.gradle:
+Add the following nexus repository(fix china access slow problem,already append to central nexus.)  to your build.gradle:
 
     allprojects {
         repositories {
@@ -60,7 +60,7 @@ Add the following nexus repository to your build.gradle:
 
 Add the following dependency to your build.gradle:
     
-    compile "com.cuisongliu:druid-spring-boot-starter:1.0"
+    compile "com.cuisongliu:druid-spring-boot-starter:1+"
     
 ### springboot properties set
 
@@ -89,7 +89,12 @@ at  application.properties or application.yml append some properties.
 |spring.datasource.druid.validation-query-timeout|yes|-1|
 |spring.datasource.druid.min-evictable-idle-time-millis|yes|1000L * 60L * 30L|
 |spring.datasource.druid.connection-properties|yes|null|
-|spring.datasource.druid.servlet.enabled|yes|true|
+
+[servlet properties](https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_StatViewServlet%E9%85%8D%E7%BD%AE)
+
+| properties | IsNull? | Defaults |
+| :------|:------|:------|
+|spring.datasource.druid.servlet.enable|yes|true|
 |spring.datasource.druid.servlet.url-mappings|yes|/druid/*|
 |spring.datasource.druid.servlet.allow|yes|null|
 |spring.datasource.druid.servlet.deny|yes|null|
@@ -97,8 +102,18 @@ at  application.properties or application.yml append some properties.
 |spring.datasource.druid.servlet.login-password|yes|null|
 |spring.datasource.druid.servlet.reset-enable|yes|null|
 
+[filter properties](https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_%E9%85%8D%E7%BD%AEWebStatFilter)
 
-
+| properties | IsNull? | Defaults |
+| :------|:------|:------|
+|spring.datasource.druid.servlet.enable|yes|false|
+|spring.datasource.druid.servlet.exclusions|yes|*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*|
+|spring.datasource.druid.servlet.url-pattern|yes|/*|
+|spring.datasource.druid.servlet.session-stat-max-count|yes|1000|
+|spring.datasource.druid.servlet.session-stat-enable|yes|false|
+|spring.datasource.druid.servlet.principal-session-name|yes|root|
+|spring.datasource.druid.servlet.principal-cookie-name|yes|root|
+|spring.datasource.druid.servlet.profile-enable|yes|true|
 
 ## Acknowledgments
 

@@ -37,7 +37,7 @@ import org.springframework.context.annotation.Bean;
  * @since 2017/5/18
  */
 @EnableConfigurationProperties(DruidServletProperties.class)
-@ConditionalOnProperty(name = "spring.datasource.druid.servlet.enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(name =DruidServletProperties.DRUID_SERVLET_PREFIX+ ".enable", havingValue = "true", matchIfMissing = true)
 public class DruidServletAutoConfiguration {
 
     @Bean
