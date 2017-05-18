@@ -90,6 +90,15 @@ at  application.properties or application.yml append some properties.
 |spring.datasource.druid.min-evictable-idle-time-millis|yes|1000L * 60L * 30L|
 |spring.datasource.druid.connection-properties|yes|null|
 
+sql slow config:
+
+    spring:
+     datasource:
+        druid:
+          connection-properties:
+            - druid.stat.mergeSql=true
+            - druid.stat.slowSqlMillis=5000
+
 [servlet properties](https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_StatViewServlet%E9%85%8D%E7%BD%AE)
 
 | properties | IsNull? | Defaults |
@@ -111,9 +120,44 @@ at  application.properties or application.yml append some properties.
 |spring.datasource.druid.servlet.url-pattern|yes|/*|
 |spring.datasource.druid.servlet.session-stat-max-count|yes|1000|
 |spring.datasource.druid.servlet.session-stat-enable|yes|false|
-|spring.datasource.druid.servlet.principal-session-name|yes|root|
-|spring.datasource.druid.servlet.principal-cookie-name|yes|root|
+|spring.datasource.druid.servlet.principal-session-name|yes|USER_SESSION|
+|spring.datasource.druid.servlet.principal-cookie-name|yes|USER_COOKIE|
 |spring.datasource.druid.servlet.profile-enable|yes|true|
+
+[stat properties](https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_Druid%E5%92%8CSpring%E5%85%B3%E8%81%94%E7%9B%91%E6%8E%A7%E9%85%8D%E7%BD%AE)
+
+| properties | IsNull? | Defaults |
+| :------|:------|:------|
+|spring.datasource.druid.stat.enable|yes|false|
+|spring.datasource.druid.stat.aop-type|no||
+|spring.datasource.druid.stat.target-bean-type|no|null|
+
+spring.datasource.druid.stat.aop-type  待选值有[ type ]
+spring.datasource.druid.stat.aop-type  selected value is [ type ]
+
+## Example
+
+
+    spring:
+      datasource:
+        url: xxx
+        username: xxx
+        password: xxx
+        druid:
+              filters: stat,wall,log4j
+              connection-properties:
+                - druid.stat.mergeSql=true
+                - druid.stat.slowSqlMillis=5000
+              filter:
+                enable: true
+                principal-session-name: session_admin
+                profile-enable: true
+                principal-cookie-name: session_admin
+                session-stat-enable: true
+              stat:
+                enable: true
+                aop-type: type
+                target-bean-type: com.cuisongliu.springboot.core.mapper.MyMapper
 
 ## Acknowledgments
 

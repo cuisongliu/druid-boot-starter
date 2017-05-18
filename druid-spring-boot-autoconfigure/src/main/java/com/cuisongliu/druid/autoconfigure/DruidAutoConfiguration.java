@@ -24,6 +24,8 @@
 package com.cuisongliu.druid.autoconfigure;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.cuisongliu.druid.autoconfigure.stat.DruidStatAutoConfiguration;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -42,8 +44,14 @@ import java.sql.SQLException;
 @Configuration
 @EnableConfigurationProperties(DruidProperties.class)
 @ConditionalOnClass(DruidDataSource.class)
-@Import({DruidServletAutoConfiguration.class,DruidFilterAutoConfiguration.class})
+@Import({DruidServletAutoConfiguration.class,DruidFilterAutoConfiguration.class, DruidStatAutoConfiguration.class})
 public class DruidAutoConfiguration {
+    @Value("${spring.datasource.url}")
+    private String url;
+    @Value("${spring.datasource.username}")
+    private String username;
+    @Value("${spring.datasource.password}")
+    private String password;
 
     @Bean
     @ConfigurationProperties(DruidProperties.DRUID_PREFIX)
@@ -57,6 +65,9 @@ public class DruidAutoConfiguration {
     }
 
     private void configDruid(DruidDataSource dataSource, DruidProperties properties) {
+        dataSource.setUrl(url);
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
         if (properties.getInitialSize() > 0) {
             dataSource.setInitialSize(properties.getInitialSize());
         }

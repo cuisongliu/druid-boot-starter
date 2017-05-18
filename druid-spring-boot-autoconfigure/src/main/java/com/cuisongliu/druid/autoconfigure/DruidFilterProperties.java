@@ -33,8 +33,8 @@ public class DruidFilterProperties {
     private String urlPattern = "/*";
     private Integer sessionStatMaxCount = 1000;
     private Boolean sessionStatEnable = false; //session统计功能
-    private String principalSessionName = "root";//使得druid能够知道当前的session的用户是谁
-    private String principalCookieName = "root";//使得druid能够知道当前的cookie的用户是谁
+    private String principalSessionName = "USER_SESSION";//使得druid能够知道当前的session的用户是谁
+    private String principalCookieName = "USER_COOKIE";//使得druid能够知道当前的cookie的用户是谁
     private Boolean profileEnable = true; //profileEnable能够监控单个url调用的sql
 
     public Boolean getEnable() {
