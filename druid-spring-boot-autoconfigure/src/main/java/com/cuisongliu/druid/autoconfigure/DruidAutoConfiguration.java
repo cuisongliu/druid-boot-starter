@@ -30,6 +30,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -41,6 +42,7 @@ import java.sql.SQLException;
 @Configuration
 @EnableConfigurationProperties(DruidProperties.class)
 @ConditionalOnClass(DruidDataSource.class)
+@Import({DruidServletAutoConfiguration.class})
 public class DruidAutoConfiguration {
 
 
@@ -92,7 +94,7 @@ public class DruidAutoConfiguration {
         dataSource.setPoolPreparedStatements(properties.getPoolPreparedStatements());
         dataSource.setConnectProperties(properties.getConnectionProperties());
         try {
-            dataSource.setFilters(properties.getFilters() != null ? properties.getFilters() : "stat");
+            dataSource.setFilters(properties.getFilters());
         } catch (SQLException e) {
             throw new IllegalArgumentException("please check your spring.datasource.druid.filters property.", e);
         }

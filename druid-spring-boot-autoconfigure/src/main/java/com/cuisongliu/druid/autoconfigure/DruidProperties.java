@@ -29,7 +29,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.Properties;
 
 /**
- * 只提供了常用的属性，如果有需要，自己添加
+ *  druid数据源的基础属性
  *
  * @author cuijinrui
  * @since 2017/5/14
@@ -52,7 +52,7 @@ public class DruidProperties {
     //# 打开PSCache，并且指定每个连接上PSCache的大小
     private Boolean poolPreparedStatements = false;
     //配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
-    private String filters = "";
+    private String filters = "stat";
     private Integer maxPoolPreparedStatementPerConnectionSize = -1;
     private Integer validationQueryTimeout = -1;
     private Long minEvictableIdleTimeMillis = DruidAbstractDataSource.DEFAULT_MIN_EVICTABLE_IDLE_TIME_MILLIS;

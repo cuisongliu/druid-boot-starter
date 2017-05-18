@@ -89,6 +89,14 @@ at  application.properties or application.yml append some properties.
 |spring.datasource.druid.validation-query-timeout|yes|-1|
 |spring.datasource.druid.min-evictable-idle-time-millis|yes|1000L * 60L * 30L|
 |spring.datasource.druid.connection-properties|yes|null|
+|spring.datasource.druid.servlet.enabled|yes|true|
+|spring.datasource.druid.servlet.url-mappings|yes|/druid/*|
+|spring.datasource.druid.servlet.allow|yes|null|
+|spring.datasource.druid.servlet.deny|yes|null|
+|spring.datasource.druid.servlet.login-username|yes|null|
+|spring.datasource.druid.servlet.login-password|yes|null|
+|spring.datasource.druid.servlet.reset-enable|yes|null|
+
 
 
 
