@@ -29,7 +29,7 @@ import org.springframework.context.annotation.Import;
 
 @EnableConfigurationProperties(DruidStatProperties.class)
 @ConditionalOnProperty(name = DruidStatProperties.DRUID_STAT_PREFIX +".enable", havingValue = "true")
-@Import({DruidTypeAopAutoConfiguration.class})
+@Import({DruidStatInitAutoConfiguration.class,DruidTypeAopAutoConfiguration.class})
 public class DruidStatAutoConfiguration {
 
 }

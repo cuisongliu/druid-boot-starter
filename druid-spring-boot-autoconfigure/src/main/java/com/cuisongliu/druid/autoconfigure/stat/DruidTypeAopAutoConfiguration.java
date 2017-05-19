@@ -27,10 +27,8 @@ import com.alibaba.druid.support.spring.stat.BeanTypeAutoProxyCreator;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 
 @ConditionalOnProperty(name = DruidStatProperties.DRUID_STAT_PREFIX +".aop-type", havingValue = "type")
-@Import({DruidStatInitAutoConfiguration.class})
 public class DruidTypeAopAutoConfiguration {
 
     @Bean
