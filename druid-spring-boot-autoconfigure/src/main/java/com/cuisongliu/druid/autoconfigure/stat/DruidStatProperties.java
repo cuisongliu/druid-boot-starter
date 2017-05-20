@@ -27,20 +27,30 @@ package com.cuisongliu.druid.autoconfigure.stat;
 import com.cuisongliu.druid.autoconfigure.DruidProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.ArrayList;
+import java.util.List;
+/**
+ * stat和spring监控关联的参数
+ * @author cuisongliu
+ * @since  2017年5月20日 11:15:26
+ */
 @ConfigurationProperties(prefix = DruidStatProperties.DRUID_STAT_PREFIX)
 public class DruidStatProperties {
     public static final String DRUID_STAT_PREFIX = DruidProperties.DRUID_PREFIX+".stat";
     public static final String DRUID_STAT_INTERCEPTOR_NAME = "druid-stat-interceptor";
     private Boolean enable = false;
-    private String aopType ="";
+    private List<String> aopTypes = new ArrayList<String>();
+    //type所用
     private Class<?> targetBeanType;
 
-    public String getAopType() {
-        return aopType;
+    //name 所用
+    private List<String> beanNames;
+    public List<String> getAopTypes() {
+        return aopTypes;
     }
 
-    public void setAopType(String aopType) {
-        this.aopType = aopType;
+    public void setAopTypes(List<String> aopTypes) {
+        this.aopTypes = aopTypes;
     }
 
     public Boolean getEnable() {
@@ -57,5 +67,18 @@ public class DruidStatProperties {
 
     public void setTargetBeanType(Class<?> targetBeanType) {
         this.targetBeanType = targetBeanType;
+    }
+
+    public List<String> getBeanNames() {
+        return beanNames;
+    }
+
+    public void setBeanNames(List<String> beanNames) {
+        this.beanNames = beanNames;
+    }
+
+    public interface AopTypeValues{
+        String TYPE ="type";
+        String NAME ="name";
     }
 }
