@@ -29,7 +29,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-
+/**
+ * druid filter auto config
+ * @author cuisongliu
+ * @since 2017/2/5.
+ */
 @EnableConfigurationProperties(DruidFilterProperties.class)
 @ConditionalOnProperty(name = DruidFilterProperties.DRUID_FILTER_PREFIX+".enable", havingValue = "true")
 public class DruidFilterAutoConfiguration {

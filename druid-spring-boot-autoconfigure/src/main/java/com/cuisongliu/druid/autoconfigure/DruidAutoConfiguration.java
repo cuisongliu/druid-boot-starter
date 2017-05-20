@@ -38,6 +38,7 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 /**
+ * druid auto config
  * @author cuisongliu
  * @since 2017/2/5.
  */

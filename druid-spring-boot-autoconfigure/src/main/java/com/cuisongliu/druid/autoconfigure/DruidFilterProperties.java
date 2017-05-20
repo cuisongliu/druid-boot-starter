@@ -25,6 +25,11 @@ package com.cuisongliu.druid.autoconfigure;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+/**
+ * druid filter properties
+ * @author cuisongliu
+ * @since 2017/2/5.
+ */
 @ConfigurationProperties(prefix = DruidFilterProperties.DRUID_FILTER_PREFIX)
 public class DruidFilterProperties {
     public static final String DRUID_FILTER_PREFIX = DruidProperties.DRUID_PREFIX+".filter";
