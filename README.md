@@ -129,12 +129,23 @@ sql slow config:
 | properties | IsNull? | Defaults |
 | :------|:------|:------|
 |spring.datasource.druid.stat.enable|yes|false|
-|spring.datasource.druid.stat.aop-type|no||
-|spring.datasource.druid.stat.target-bean-type|no|null|
+|spring.datasource.druid.stat.aop-types|yes||
+|spring.datasource.druid.stat.target-bean-type|yes|null|
+|spring.datasource.druid.stat.bean-names|yes|null|
 
-spring.datasource.druid.stat.aop-type  待选值有[ type ]
+> aop-type可多选,且多选时必须拿 , 分隔.
 
-spring.datasource.druid.stat.aop-type  selected value is [ type ]
+
+spring.datasource.druid.stat.aop-types  待选值有[ type,name ]
+
+当enable=true时候,aop-types必须有type或者name的其中一项.
+当aop-types有name值时,bean-names不能为空.当aop-types有type值时,target-bean-type不能为空.
+
+spring.datasource.druid.stat.aop-types  selected value is [ type,name ]
+
+
+When ```enable=true``` , aop-types must have either ```type``` or  ```name```.
+When ```aop-types``` has ```name``` value, ```bean-names``` can not be null. When ```aop-types``` have ```type``` values, ```target-bean-type``` can not be empty.
 
 ## Example
 
@@ -157,8 +168,11 @@ spring.datasource.druid.stat.aop-type  selected value is [ type ]
                 session-stat-enable: true
               stat:
                 enable: true
-                aop-type: type
+                aop-type: type,name
                 target-bean-type: com.cuisongliu.springboot.core.mapper.MyMapper
+                bean-names:
+                   - UserMapper
+                   - userMapper
 
 ## Acknowledgments
 
