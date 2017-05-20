@@ -26,10 +26,14 @@ package com.cuisongliu.druid.autoconfigure.stat;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Import;
-
+/**
+ * stat和spring监控关联主配置
+ * @author cuisongliu
+ * @since  2017年5月20日 11:15:26
+ */
 @EnableConfigurationProperties(DruidStatProperties.class)
 @ConditionalOnProperty(name = DruidStatProperties.DRUID_STAT_PREFIX +".enable", havingValue = "true")
-@Import({DruidStatInitAutoConfiguration.class,DruidTypeAopAutoConfiguration.class})
+@Import({DruidStatInitAutoConfiguration.class,DruidNameAopAutoConfiguration.class,DruidTypeAopAutoConfiguration.class})
 public class DruidStatAutoConfiguration {
 
 }
