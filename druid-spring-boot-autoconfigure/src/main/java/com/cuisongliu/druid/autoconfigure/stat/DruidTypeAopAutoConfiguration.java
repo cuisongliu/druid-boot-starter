@@ -24,18 +24,30 @@
 package com.cuisongliu.druid.autoconfigure.stat;
 
 import com.alibaba.druid.support.spring.stat.BeanTypeAutoProxyCreator;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-
-@ConditionalOnProperty(name = DruidStatProperties.DRUID_STAT_PREFIX +".aop-type", havingValue = "type")
+/**
+ * 按照类型(接口或者父类)来拦截配置stat和spring监控关联
+ * @author cuisongliu
+ * @since  2017年5月20日 11:15:26
+ */
+@ConditionalOnExpression("'${"+ DruidStatProperties.DRUID_STAT_PREFIX+".aop-types}'.contains('"+DruidStatProperties.AopTypeValues.TYPE+"')")
 public class DruidTypeAopAutoConfiguration {
+
+    @Value("${spring.aop.proxy-target-class:false}")
+    private boolean proxyTargetClass;
 
     @Bean
     @ConfigurationProperties(DruidStatProperties.DRUID_STAT_PREFIX)
-    public BeanTypeAutoProxyCreator proxyCreator(DruidStatProperties properties){
+    public BeanTypeAutoProxyCreator typeProxyCreator(DruidStatProperties properties){
+        if (properties.getTargetBeanType() == null){
+            throw new IllegalStateException(DruidStatProperties.DRUID_STAT_PREFIX+".target-bean-type must  not null.");
+        }
         BeanTypeAutoProxyCreator creator = new BeanTypeAutoProxyCreator();
         creator.setTargetBeanType(properties.getTargetBeanType());
+        creator.setProxyTargetClass(proxyTargetClass);
         creator.setInterceptorNames(DruidStatProperties.DRUID_STAT_INTERCEPTOR_NAME);
         return  creator;
     }
