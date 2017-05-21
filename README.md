@@ -133,9 +133,6 @@ sql slow config:
 |spring.datasource.druid.stat.target-bean-type|yes|null|
 |spring.datasource.druid.stat.bean-names|yes|null|
 
-> aop-type可多选,且多选时必须拿 , 分隔.
-
-
 spring.datasource.druid.stat.aop-types  待选值有[ type,name ]
 
 当enable=true时候,aop-types必须有type或者name的其中一项.
