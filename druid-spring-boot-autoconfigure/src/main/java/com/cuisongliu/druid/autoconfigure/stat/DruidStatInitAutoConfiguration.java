@@ -24,9 +24,11 @@
 package com.cuisongliu.druid.autoconfigure.stat;
 
 import com.alibaba.druid.support.spring.stat.DruidStatInterceptor;
+import com.cuisongliu.druid.autoconfigure.condition.AopTypesInitCondition;
 import org.aopalliance.intercept.Interceptor;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
+
 /**
  * stat和spring监控关联的初始化配置
  * @author cuisongliu
@@ -35,16 +37,8 @@ import org.springframework.context.annotation.Bean;
 public class DruidStatInitAutoConfiguration {
 
     @Bean(DruidStatProperties.DRUID_STAT_INTERCEPTOR_NAME)
-    @ConfigurationProperties(DruidStatProperties.DRUID_STAT_PREFIX)
-    public Interceptor druidStatInterceptor(DruidStatProperties properties) {
-        if (properties.getAopTypes().contains(DruidStatProperties.AopTypeValues.TYPE)||
-            properties.getAopTypes().contains(DruidStatProperties.AopTypeValues.NAME) ) {
-            return new DruidStatInterceptor();
-        } else {
-            throw new IllegalStateException(DruidStatProperties.DRUID_STAT_PREFIX + ".aop-types must has [" +
-                    DruidStatProperties.AopTypeValues.TYPE + "," +
-                    DruidStatProperties.AopTypeValues.NAME + "," +
-                    "]");
-        }
+    @Conditional(AopTypesInitCondition.class)
+    public Interceptor druidStatInterceptor() {
+        return new DruidStatInterceptor();
     }
 }

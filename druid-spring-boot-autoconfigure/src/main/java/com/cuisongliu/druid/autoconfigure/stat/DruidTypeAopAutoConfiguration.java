@@ -24,16 +24,18 @@
 package com.cuisongliu.druid.autoconfigure.stat;
 
 import com.alibaba.druid.support.spring.stat.BeanTypeAutoProxyCreator;
+import com.cuisongliu.druid.autoconfigure.condition.NameAopTypesCondition;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
+
 /**
  * 按照类型(接口或者父类)来拦截配置stat和spring监控关联
  * @author cuisongliu
  * @since  2017年5月20日 11:15:26
  */
-@ConditionalOnExpression("'${"+ DruidStatProperties.DRUID_STAT_PREFIX+".aop-types}'.contains('"+DruidStatProperties.AopTypeValues.TYPE+"')")
+@Conditional(NameAopTypesCondition.class)
 public class DruidTypeAopAutoConfiguration {
 
     @Value("${spring.aop.proxy-target-class:false}")
