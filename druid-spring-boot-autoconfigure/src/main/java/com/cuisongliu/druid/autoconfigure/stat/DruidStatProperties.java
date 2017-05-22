@@ -58,6 +58,11 @@ public class DruidStatProperties {
      */
     private List<String> beanNames;
 
+    /**
+     * 当aopTypes=pointcut所用,监控所有的表达式
+     */
+    private String[] patterns;
+
     public List<AopType> getAopTypes() {
         return aopTypes;
     }
@@ -90,6 +95,13 @@ public class DruidStatProperties {
         this.beanNames = beanNames;
     }
 
+    public String[] getPatterns() {
+        return patterns;
+    }
+
+    public void setPatterns(String[] patterns) {
+        this.patterns = patterns;
+    }
 
     public enum AopType {
         /**
@@ -99,7 +111,12 @@ public class DruidStatProperties {
         /**
          * aop 类型为type 则targetBeanType属性不能为空
          */
-        type("type");
+        type("type"),
+        /**
+         * aop 类型为advisor 则patterns属性不能为空
+         */
+        pointcut("pointcut");
+
         private String value;
 
         AopType(String value) {

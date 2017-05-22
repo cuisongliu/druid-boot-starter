@@ -24,34 +24,17 @@
 package com.cuisongliu.druid.autoconfigure.condition;
 
 import com.cuisongliu.druid.autoconfigure.stat.DruidStatProperties;
-import org.springframework.context.annotation.Condition;
-import org.springframework.context.annotation.ConditionContext;
-import org.springframework.core.type.AnnotatedTypeMetadata;
-
-import java.util.*;
 
 /**
- * aop types init conditional
+ * name aop types conditional
  *
  * @author cuisongliu [cuisongliu@qq.com]
- * @since 2017-05-21 11:32
+ * @since 2017-05-21 11:47
  */
-public  class AopTypesInitCondition implements Condition {
+public class PointcutAopTypesCondition extends AopTypesCondition {
 
     @Override
-    public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-        List list = ConditionUtil.getInstance().getAopTypesValue(context);
-        if (list.contains(DruidStatProperties.AopType.type.getValue())||
-            list.contains(DruidStatProperties.AopType.name.getValue()) ||
-            list.contains(DruidStatProperties.AopType.pointcut.getValue())) {
-            return true;
-        } else {
-            throw new IllegalStateException(DruidStatProperties.DRUID_STAT_PREFIX + ".aop-types must has [ " +
-                    DruidStatProperties.AopType.type.getValue() + "," +
-                    DruidStatProperties.AopType.name.getValue() + "," +
-                    DruidStatProperties.AopType.pointcut.getValue() + " " +
-                    "]");
-        }
+    protected DruidStatProperties.AopType containsValue() {
+        return DruidStatProperties.AopType.pointcut;
     }
-
 }
