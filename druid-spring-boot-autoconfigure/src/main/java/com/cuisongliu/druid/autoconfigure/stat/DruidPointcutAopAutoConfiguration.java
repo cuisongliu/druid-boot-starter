@@ -23,6 +23,7 @@
  */
 package com.cuisongliu.druid.autoconfigure.stat;
 
+import com.cuisongliu.druid.autoconfigure.condition.PointcutAopTypesCondition;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.Pointcut;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
@@ -31,6 +32,7 @@ import org.springframework.aop.support.JdkRegexpMethodPointcut;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 
 /**
  * 方法名正则匹配拦截配置
@@ -38,6 +40,7 @@ import org.springframework.context.annotation.Bean;
  * @author cuisongliu [cuisongliu@qq.com]
  * @since 2017-05-22 10:26
  */
+@Conditional(PointcutAopTypesCondition.class)
 public class DruidPointcutAopAutoConfiguration extends DruidStatInitAutoConfiguration{
     @Value("${spring.aop.proxy-target-class:false}")
     private boolean proxyTargetClass;

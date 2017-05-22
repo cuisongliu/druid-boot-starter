@@ -38,7 +38,7 @@ Add the following dependency to your pom.xml:
     <dependency>
        <groupId>com.cuisongliu</groupId>
        <artifactId>druid-spring-boot-starter</artifactId>
-       <version>1.0.31.05</version>
+       <version>1.0.31.06</version>
      </dependency>
 
 ### gradle
