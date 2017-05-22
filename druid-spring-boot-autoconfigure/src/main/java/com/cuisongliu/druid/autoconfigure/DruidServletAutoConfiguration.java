@@ -59,7 +59,7 @@ public class DruidServletAutoConfiguration {
             reg.addInitParameter("loginPassword", properties.getLoginPassword()); // 密码
         }
         if(properties.getResetEnable() !=null){
-            reg.addInitParameter("resetEnable", properties.getResetEnable());// 禁用HTML页面上的“Reset All”功能
+            reg.addInitParameter("resetEnable", properties.getResetEnable().toString());// 禁用HTML页面上的“Reset All”功能
         }
         return reg;
     }
