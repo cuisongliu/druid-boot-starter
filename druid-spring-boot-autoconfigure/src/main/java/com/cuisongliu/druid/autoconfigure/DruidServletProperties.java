@@ -34,13 +34,34 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class DruidServletProperties {
     public static final String DRUID_SERVLET_PREFIX = DruidProperties.DRUID_PREFIX+".servlet";
 
+    /**
+     * 是否开启druid的监控页面显示,默认为true
+     */
     private Boolean enable = true;
+    /**
+     * druid 监控页面的前缀默认为 '/druid/*'
+     */
     private String urlMappings = "/druid/*";
-    private String allow;// IP白名单 (没有配置或者为空，则允许所有访问)
-    private String deny; //IP黑名单 (存在共同时，deny优先于allow)
-    private String loginUsername;//用户名
-    private String loginPassword;// 密码
-    private String resetEnable;// 禁用HTML页面上的“Reset All”功能
+    /**
+     * IP白名单 (没有配置或者为空，则允许所有访问)
+     */
+    private String allow;
+    /**
+     * IP黑名单 (存在共同时，deny优先于allow)
+     */
+    private String deny;
+    /**
+     * 用户名
+     */
+    private String loginUsername;
+    /**
+     *  密码
+     */
+    private String loginPassword;
+    /**
+     * 禁用HTML页面上的“Reset All”功能 ,默认为false
+     */
+    private Boolean resetEnable =false;
 
     public String getUrlMappings() {
         return urlMappings;
@@ -82,11 +103,11 @@ public class DruidServletProperties {
         this.loginPassword = loginPassword;
     }
 
-    public String getResetEnable() {
+    public Boolean getResetEnable() {
         return resetEnable;
     }
 
-    public void setResetEnable(String resetEnable) {
+    public void setResetEnable(Boolean resetEnable) {
         this.resetEnable = resetEnable;
     }
 

@@ -33,14 +33,38 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = DruidFilterProperties.DRUID_FILTER_PREFIX)
 public class DruidFilterProperties {
     public static final String DRUID_FILTER_PREFIX = DruidProperties.DRUID_PREFIX+".filter";
+    /**
+     * 是否加入druid拦截器,默认为false
+     */
     private Boolean enable = false;
+    /**
+     * 拦截资源排除,默认为'*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+     */
     private String exclusions = "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*";
+    /**
+     * 需要拦截的Url,默认为'/*'
+     */
     private String urlPattern = "/*";
+    /**
+     * 缺省sessionStatMaxCount是1000个。你可以按需要进行配置
+     */
     private Integer sessionStatMaxCount = 1000;
-    private Boolean sessionStatEnable = false; //session统计功能
-    private String principalSessionName = "USER_SESSION";//使得druid能够知道当前的session的用户是谁
-    private String principalCookieName = "USER_COOKIE";//使得druid能够知道当前的cookie的用户是谁
-    private Boolean profileEnable = true; //profileEnable能够监控单个url调用的sql
+    /**
+     * session统计功能,默认为false
+     */
+    private Boolean sessionStatEnable = false;
+    /**
+     * 使得druid能够知道当前的session的用户是谁,默认为USER_SESSION
+     */
+    private String principalSessionName = "USER_SESSION";
+    /**
+     * 使得druid能够知道当前的cookie的用户是谁,默认为USER_COOKIE
+     */
+    private String principalCookieName = "USER_COOKIE";
+    /**
+     * profileEnable能够监控单个url调用的sql,，默认为true
+     */
+    private Boolean profileEnable = true;
 
     public Boolean getEnable() {
         return enable;
