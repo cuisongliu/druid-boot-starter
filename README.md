@@ -129,21 +129,27 @@ sql slow config:
 | properties | IsNull? | Defaults |
 | :------|:------|:------|
 |spring.datasource.druid.stat.enable|yes|false|
-|spring.datasource.druid.stat.aop-types|yes||
+|spring.datasource.druid.stat.aop-types|yes|null|
 |spring.datasource.druid.stat.target-bean-type|yes|null|
 |spring.datasource.druid.stat.bean-names|yes|null|
 /spring.datasource.druid.stat.patterns|yes|null|
 
-spring.datasource.druid.stat.aop-types  待选值有[ type,name,pointcut ]
+spring.datasource.druid.stat.aop-types  待选值有[ ***type,name,pointcut*** ]
 
 当enable=true时候,aop-types必须有type或者name的其中一项.
-当aop-types有name值时,bean-names不能为空.当aop-types有type值时,target-bean-type不能为空.当aop-types有pointcut值时,patterns不能为空.
 
-spring.datasource.druid.stat.aop-types  selected value is [ type,name,pointcut ]
+- 当aop-types有name值时,bean-names不能为空.
+- 当aop-types有type值时,target-bean-type不能为空.
+- 当aop-types有pointcut值时,patterns不能为空.
+
+spring.datasource.druid.stat.aop-types  selected value is [ ***type,name,pointcut*** ]
 
 
 When ```enable=true``` , aop-types must have either ```type``` or  ```name```.
-When ```aop-types``` has ```name``` value, ```bean-names``` can not be null. When ```aop-types``` have ```type``` values, ```target-bean-type``` can not be empty.When ```aop-types``` have ```pointcut``` values, ```patterns``` can not be empty.
+
+ - When ```aop-types``` has ```name``` value, ```bean-names``` can not be null.
+ - When ```aop-types``` have ```type``` values, ```target-bean-type``` can not be empty.
+ - When ```aop-types``` have ```pointcut``` values, ```patterns``` can not be empty.
 
 ## Example
 
