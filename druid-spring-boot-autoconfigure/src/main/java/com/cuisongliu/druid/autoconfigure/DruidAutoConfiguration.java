@@ -84,9 +84,6 @@ public class DruidAutoConfiguration {
         if (properties.getTimeBetweenEvictionRunsMillis() > 0l){
             dataSource.setTimeBetweenEvictionRunsMillis(properties.getTimeBetweenEvictionRunsMillis());
         }
-        if (properties.getMaxOpenPreparedStatements() > 0 ){
-            dataSource.setMaxOpenPreparedStatements(properties.getMaxOpenPreparedStatements());
-        }
         if (properties.getMaxPoolPreparedStatementPerConnectionSize() > 0 ){
             dataSource.setMaxPoolPreparedStatementPerConnectionSize(properties.getMaxPoolPreparedStatementPerConnectionSize());
         }

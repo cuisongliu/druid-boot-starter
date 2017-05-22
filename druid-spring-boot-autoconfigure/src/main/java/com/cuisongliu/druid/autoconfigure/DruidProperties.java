@@ -37,26 +37,83 @@ import java.util.Properties;
 @ConfigurationProperties(prefix = DruidProperties.DRUID_PREFIX)
 public class DruidProperties {
     public static final String DRUID_PREFIX = "spring.datasource.druid";
-    private int maxActive = DruidAbstractDataSource.DEFAULT_MAX_ACTIVE_SIZE;
-    private int minIdle = DruidAbstractDataSource.DEFAULT_MIN_IDLE;
+    /**
+     * 初始化时建立物理连接的个数。默认为0 <br/>
+     * 初始化发生在显示调用init方法，或者第一次getConnection时
+     */
     private int initialSize = DruidAbstractDataSource.DEFAULT_INITIAL_SIZE;
+    /**
+     * 最大连接池数量, 默认为8 <br/>
+     */
+    private int maxActive = DruidAbstractDataSource.DEFAULT_MAX_ACTIVE_SIZE;
+    /**
+     * 最小连接池数量, 默认为0 <br/>
+     */
+    private int minIdle = DruidAbstractDataSource.DEFAULT_MIN_IDLE;
+    /**
+     * 获取连接时最大等待时间，单位毫秒。默认为-1 <br/>
+     * 配置了maxWait之后，缺省启用公平锁，并发效率会有所下降，<br/>
+     * 如果需要可以通过配置useUnfairLock属性为true使用非公平锁。
+     */
     private int maxWait = DruidAbstractDataSource.DEFAULT_MAX_WAIT;
-    //配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
-    private Long timeBetweenEvictionRunsMillis = DruidAbstractDataSource.DEFAULT_TIME_BETWEEN_EVICTION_RUNS_MILLIS;
-    private Integer maxOpenPreparedStatements = -1;
-    private boolean testOnBorrow = DruidAbstractDataSource.DEFAULT_TEST_ON_BORROW;
-    //配置一个连接在池中最小生存的时间，单位是毫秒
-    private String validationQuery = DruidAbstractDataSource.DEFAULT_VALIDATION_QUERY;
-    private Boolean testOnReturn = DruidAbstractDataSource.DEFAULT_TEST_ON_RETURN;
-    private Boolean testWhileIdle = DruidAbstractDataSource.DEFAULT_WHILE_IDLE;
-    //# 打开PSCache，并且指定每个连接上PSCache的大小
+    /**
+     * 是否缓存preparedStatement，也就是PSCache。默认为false
+     * PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭。
+     */
     private Boolean poolPreparedStatements = false;
-    //配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
-    private String filters = "stat";
+    /**
+     * 要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。<br/>
+     * 在Druid中，不会存在Oracle下PSCache占用内存过多的问题，可以把这个数值配置大一些，比如说100<br/>
+     * 默认为 -1
+     */
     private Integer maxPoolPreparedStatementPerConnectionSize = -1;
+    /**
+     * 用来检测连接是否有效的sql，要求是一个查询语句，常用select 'x'。<br/>
+     * 如果validationQuery为null，testOnBorrow、testOnReturn、testWhileIdle都不会起作用。
+     */
+    private String validationQuery = DruidAbstractDataSource.DEFAULT_VALIDATION_QUERY;
+    /**
+     * 单位：秒，检测连接是否有效的超时时间。默认为 -1 <br/>
+     * 底层调用jdbc Statement对象的void setQueryTimeout(int seconds)方法
+     */
     private Integer validationQueryTimeout = -1;
+    /**
+     * 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。默认为false
+     */
+    private boolean testOnBorrow = DruidAbstractDataSource.DEFAULT_TEST_ON_BORROW;
+    /**
+     * 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。默认为false
+     */
+    private Boolean testOnReturn = DruidAbstractDataSource.DEFAULT_TEST_ON_RETURN;
+    /**
+     * 建议配置为true，不影响性能，并且保证安全性。默认为true<br/>
+     * 申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。
+     *
+     */
+    private Boolean testWhileIdle = DruidAbstractDataSource.DEFAULT_WHILE_IDLE;
+    /**
+     *  有两个含义：<br/>
+     *  1) Destroy线程会检测连接的间隔时间，如果连接空闲时间大于等于minEvictableIdleTimeMillis则关闭物理连接。<br/>
+     *  2) testWhileIdle的判断依据，详细看testWhileIdle属性的说明<br/>
+     *  默认为60000L
+     */
+    private Long timeBetweenEvictionRunsMillis = DruidAbstractDataSource.DEFAULT_TIME_BETWEEN_EVICTION_RUNS_MILLIS;
+    /**
+     *  连接保持空闲而不被驱逐的最长时间.默认为1800000L
+     */
     private Long minEvictableIdleTimeMillis = DruidAbstractDataSource.DEFAULT_MIN_EVICTABLE_IDLE_TIME_MILLIS;
 
+    /**
+     * 属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有：<br/>
+     * 监控统计用的filter:stat<br/>
+     * 日志用的filter:log4j<br/>
+     * 防御sql注入的filter:wall<br/>
+     */
+    private String filters = "stat";
+
+    /**
+     * 额外的属性,例如慢查询等参数.
+     */
     private Properties connectionProperties;
 
     public Properties getConnectionProperties() {
@@ -169,15 +226,6 @@ public class DruidProperties {
 
     public void setMinEvictableIdleTimeMillis(Long minEvictableIdleTimeMillis) {
         this.minEvictableIdleTimeMillis = minEvictableIdleTimeMillis;
-    }
-
-
-    public Integer getMaxOpenPreparedStatements() {
-        return maxOpenPreparedStatements;
-    }
-
-    public void setMaxOpenPreparedStatements(Integer maxOpenPreparedStatements) {
-        this.maxOpenPreparedStatements = maxOpenPreparedStatements;
     }
 
     public String getFilters() {
