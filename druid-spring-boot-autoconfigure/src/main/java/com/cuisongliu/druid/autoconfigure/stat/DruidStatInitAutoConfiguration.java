@@ -24,10 +24,9 @@
 package com.cuisongliu.druid.autoconfigure.stat;
 
 import com.alibaba.druid.support.spring.stat.DruidStatInterceptor;
-import com.cuisongliu.druid.autoconfigure.condition.AopTypesInitCondition;
 import org.aopalliance.intercept.Interceptor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
 
 /**
  * stat和spring监控关联的初始化配置
@@ -36,8 +35,8 @@ import org.springframework.context.annotation.Conditional;
  */
 public class DruidStatInitAutoConfiguration {
 
+    @ConditionalOnMissingBean(name = {DruidStatProperties.DRUID_STAT_INTERCEPTOR_NAME})
     @Bean(DruidStatProperties.DRUID_STAT_INTERCEPTOR_NAME)
-    @Conditional(AopTypesInitCondition.class)
     public Interceptor druidStatInterceptor() {
         return new DruidStatInterceptor();
     }

@@ -23,8 +23,10 @@
  */
 package com.cuisongliu.druid.autoconfigure.stat;
 
+import com.cuisongliu.druid.autoconfigure.condition.AopTypesInitCondition;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Import;
 /**
  * stat和spring监控关联主配置
@@ -33,7 +35,8 @@ import org.springframework.context.annotation.Import;
  */
 @EnableConfigurationProperties(DruidStatProperties.class)
 @ConditionalOnProperty(name = DruidStatProperties.DRUID_STAT_PREFIX +".enable", havingValue = "true")
-@Import({DruidStatInitAutoConfiguration.class,DruidNameAopAutoConfiguration.class,DruidTypeAopAutoConfiguration.class})
+@Conditional(AopTypesInitCondition.class)
+@Import({DruidNameAopAutoConfiguration.class,DruidTypeAopAutoConfiguration.class})
 public class DruidStatAutoConfiguration {
 
 }

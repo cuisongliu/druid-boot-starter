@@ -36,7 +36,7 @@ import org.springframework.context.annotation.Conditional;
  * @since  2017年5月20日 11:15:26
  */
 @Conditional(NameAopTypesCondition.class)
-public class DruidTypeAopAutoConfiguration {
+public class DruidTypeAopAutoConfiguration  extends DruidStatInitAutoConfiguration{
 
     @Value("${spring.aop.proxy-target-class:false}")
     private boolean proxyTargetClass;
