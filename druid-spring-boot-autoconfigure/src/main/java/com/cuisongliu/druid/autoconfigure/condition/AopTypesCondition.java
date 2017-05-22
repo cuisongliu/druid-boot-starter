@@ -43,8 +43,8 @@ public abstract class AopTypesCondition implements Condition {
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
         List list = ConditionUtil.getInstance().getAopTypesValue(context);
-        return list.contains(containsValue());
+        return list.contains(containsValue().getValue());
     }
 
-    protected abstract String containsValue();
+    protected abstract DruidStatProperties.AopType containsValue();
 }

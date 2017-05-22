@@ -41,13 +41,13 @@ public  class AopTypesInitCondition implements Condition {
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
         List list = ConditionUtil.getInstance().getAopTypesValue(context);
-        if (list.contains(DruidStatProperties.AopTypeValues.TYPE)||
-                list.contains(DruidStatProperties.AopTypeValues.NAME) ) {
+        if (list.contains(DruidStatProperties.AopType.type.getValue())||
+                list.contains(DruidStatProperties.AopType.name.getValue()) ) {
             return true;
         } else {
             throw new IllegalStateException(DruidStatProperties.DRUID_STAT_PREFIX + ".aop-types must has [" +
-                    DruidStatProperties.AopTypeValues.TYPE + "," +
-                    DruidStatProperties.AopTypeValues.NAME + "," +
+                    DruidStatProperties.AopType.type.getValue() + "," +
+                    DruidStatProperties.AopType.name.getValue() + "," +
                     "]");
         }
     }

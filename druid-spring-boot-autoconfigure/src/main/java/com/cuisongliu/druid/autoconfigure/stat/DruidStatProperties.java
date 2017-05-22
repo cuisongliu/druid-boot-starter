@@ -29,27 +29,40 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * stat和spring监控关联的参数
+ *
  * @author cuisongliu
- * @since  2017年5月20日 11:15:26
+ * @since 2017年5月20日 11:15:26
  */
 @ConfigurationProperties(prefix = DruidStatProperties.DRUID_STAT_PREFIX)
 public class DruidStatProperties {
-    public static final String DRUID_STAT_PREFIX = DruidProperties.DRUID_PREFIX+".stat";
+    public static final String DRUID_STAT_PREFIX = DruidProperties.DRUID_PREFIX + ".stat";
     public static final String DRUID_STAT_INTERCEPTOR_NAME = "druid-stat-interceptor";
+    /**
+     * druid spring stat是否开启,默认为false
+     */
     private Boolean enable = false;
-    private List<String> aopTypes = new ArrayList<String>();
-    //type所用
+    /**
+     * aop spring监控类型
+     */
+    private List<AopType> aopTypes = new ArrayList<AopType>();
+    /**
+     * 当aopTypes=type所用 ,监控该抽象类或者接口的所有的实现方法.
+     */
     private Class<?> targetBeanType;
 
-    //name 所用
+    /**
+     * 当aopTypes=name所用,监控所有的beanNames
+     */
     private List<String> beanNames;
-    public List<String> getAopTypes() {
+
+    public List<AopType> getAopTypes() {
         return aopTypes;
     }
 
-    public void setAopTypes(List<String> aopTypes) {
+    public void setAopTypes(List<AopType> aopTypes) {
         this.aopTypes = aopTypes;
     }
 
@@ -77,8 +90,29 @@ public class DruidStatProperties {
         this.beanNames = beanNames;
     }
 
-    public interface AopTypeValues{
-        String TYPE ="type";
-        String NAME ="name";
+
+    public enum AopType {
+        /**
+         * aop 类型为name 则beanNames属性不能为空
+         */
+        name("name"),
+        /**
+         * aop 类型为type 则targetBeanType属性不能为空
+         */
+        type("type");
+        private String value;
+
+        AopType(String value) {
+            this.value = value;
+        }
+
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
     }
 }

@@ -56,14 +56,10 @@ class ConditionUtil {
         for (int i = 0; i <3 ; i++) {
             String field = context.getEnvironment().getProperty(aopTypesKey+"["+i+"]", String.class);
             if (!StringUtils.isEmpty(field))
-                keySet.add(field);
+                keySet.add(field.toLowerCase());
         }
-        ArrayList listField = context.getEnvironment().getProperty(aopTypesKey, ArrayList.class);
-        listField = listField==null?new ArrayList():listField;
         if (keySet.size() > 0 ){
             return new ArrayList<String>(keySet);
-        }else if (listField.size()>0){
-            return  listField;
         }else {
             return new ArrayList<String>();
         }

@@ -34,7 +34,7 @@ import com.cuisongliu.druid.autoconfigure.stat.DruidStatProperties;
 public class NameAopTypesCondition extends AopTypesCondition {
 
     @Override
-    protected String containsValue() {
-        return DruidStatProperties.AopTypeValues.NAME;
+    protected DruidStatProperties.AopType containsValue() {
+        return DruidStatProperties.AopType.name;
     }
 }
