@@ -26,7 +26,7 @@
 ext {
     junitVersion = "4.11"
     springBootVersion = "1.5.3.RELEASE"
-    duridVersion = "1.0.31"
+    duridVersion = "1.1.0"
     projectLocation = "https://github.com/cuisongliu/${rootProject.name}"
     baseUrl = "http://maven.cuisongliu.com"
     nexusUrl = "$baseUrl/content/groups/public/"

@@ -24,7 +24,7 @@
 package com.cuisongliu.druid.autoconfigure.stat;
 
 
-import com.cuisongliu.druid.autoconfigure.DruidProperties;
+import com.cuisongliu.druid.autoconfigure.properties.DruidProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.ArrayList;

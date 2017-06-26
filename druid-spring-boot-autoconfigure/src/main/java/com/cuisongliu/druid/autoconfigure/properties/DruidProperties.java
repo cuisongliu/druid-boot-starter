@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.cuisongliu.druid.autoconfigure;
+package com.cuisongliu.druid.autoconfigure.properties;
 
 import com.alibaba.druid.pool.DruidAbstractDataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;

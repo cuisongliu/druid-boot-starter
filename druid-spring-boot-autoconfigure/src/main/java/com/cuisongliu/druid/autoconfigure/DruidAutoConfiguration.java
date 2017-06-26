@@ -24,6 +24,7 @@
 package com.cuisongliu.druid.autoconfigure;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.cuisongliu.druid.autoconfigure.properties.DruidProperties;
 import com.cuisongliu.druid.autoconfigure.stat.DruidStatAutoConfiguration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

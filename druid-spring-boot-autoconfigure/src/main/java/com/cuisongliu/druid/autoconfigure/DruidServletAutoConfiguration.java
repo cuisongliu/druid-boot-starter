@@ -24,7 +24,9 @@
 package com.cuisongliu.druid.autoconfigure;
 
 import com.alibaba.druid.support.http.StatViewServlet;
+import com.cuisongliu.druid.autoconfigure.properties.DruidServletProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -36,6 +38,7 @@ import org.springframework.context.annotation.Bean;
  * @author cuisongliu
  * @since 2017/5/18
  */
+@ConditionalOnWebApplication
 @EnableConfigurationProperties(DruidServletProperties.class)
 @ConditionalOnProperty(name =DruidServletProperties.DRUID_SERVLET_PREFIX+ ".enable", havingValue = "true", matchIfMissing = true)
 public class DruidServletAutoConfiguration {

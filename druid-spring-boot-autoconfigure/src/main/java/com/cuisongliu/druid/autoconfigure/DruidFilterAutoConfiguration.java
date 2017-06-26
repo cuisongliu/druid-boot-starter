@@ -24,7 +24,9 @@
 package com.cuisongliu.druid.autoconfigure;
 
 import com.alibaba.druid.support.http.WebStatFilter;
+import com.cuisongliu.druid.autoconfigure.properties.DruidFilterProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -34,6 +36,7 @@ import org.springframework.context.annotation.Bean;
  * @author cuisongliu
  * @since 2017/2/5.
  */
+@ConditionalOnWebApplication
 @EnableConfigurationProperties(DruidFilterProperties.class)
 @ConditionalOnProperty(name = DruidFilterProperties.DRUID_FILTER_PREFIX+".enable", havingValue = "true")
 public class DruidFilterAutoConfiguration {

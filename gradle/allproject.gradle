@@ -24,7 +24,7 @@
 allprojects {
     apply from: "$rootDir/gradle/extra/ext.gradle"
     group 'com.cuisongliu'
-    version = "${duridVersion}.06"
+    version = "${duridVersion}"
     repositories {
         mavenLocal()
         maven { url "$nexusUrl" }
