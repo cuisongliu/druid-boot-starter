@@ -24,7 +24,7 @@
 def springBootGroup = "org.springframework.boot"
 
 dependencies {
-    compile "${springBootGroup}:spring-boot-autoconfigure:${springBootVersion}"
+    optional "${springBootGroup}:spring-boot-autoconfigure:${springBootVersion}"
     optional "${springBootGroup}:spring-boot-configuration-processor:${springBootVersion}"
     optional "${springBootGroup}:spring-boot-starter-web:${springBootVersion}"
     optional "com.alibaba:druid:${duridVersion}"

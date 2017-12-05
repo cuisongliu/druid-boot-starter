@@ -34,11 +34,16 @@ Add the following nexus repository(fix china access slow problem,already append 
 在pom.xml加入依赖
 
 Add the following dependency to your pom.xml:
-
+    
+    <dependency>
+           <groupId>com.alibaba</groupId>
+           <artifactId>druid</artifactId>
+           <version>1.1.5</version>
+    </dependency>
     <dependency>
        <groupId>com.cuisongliu</groupId>
        <artifactId>druid-spring-boot-starter</artifactId>
-       <version>1.1.0</version>
+       <version>1.2</version>
      </dependency>
 
 ### gradle
@@ -60,6 +65,7 @@ Add the following nexus repository(fix china access slow problem,already append 
 
 Add the following dependency to your build.gradle:
     
+    compile "com.alibaba:druid:1+"
     compile "com.cuisongliu:druid-spring-boot-starter:1+"
     
 ### springboot properties set
