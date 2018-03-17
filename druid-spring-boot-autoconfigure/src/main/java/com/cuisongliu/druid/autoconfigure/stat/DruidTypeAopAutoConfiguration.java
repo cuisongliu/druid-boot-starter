@@ -24,7 +24,7 @@
 package com.cuisongliu.druid.autoconfigure.stat;
 
 import com.alibaba.druid.support.spring.stat.BeanTypeAutoProxyCreator;
-import com.cuisongliu.druid.autoconfigure.condition.NameAopTypesCondition;
+import com.cuisongliu.druid.autoconfigure.condition.TypeAopTypesCondition;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -35,7 +35,7 @@ import org.springframework.context.annotation.Conditional;
  * @author cuisongliu
  * @since  2017年5月20日 11:15:26
  */
-@Conditional(NameAopTypesCondition.class)
+@Conditional(TypeAopTypesCondition.class)
 public class DruidTypeAopAutoConfiguration  extends DruidStatInitAutoConfiguration{
 
     @Value("${spring.aop.proxy-target-class:false}")
